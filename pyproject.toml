@@ -1,0 +1,16 @@
+[project]
+name = "veteran_bot_dnipro"
+version = "1.0.0"
+description = "Телеграм-бот для ветеранів війни (Дніпропетровська область)"
+authors = [{ name = "Andrey Podervinskas", email = "example@example.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "aiogram>=3.7.0",
+    "python-dotenv>=1.0.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
