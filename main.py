@@ -26,11 +26,11 @@ async def send_welcome(message: types.Message):
 async def moral_support(callback_query: types.CallbackQuery):
     await callback_query.answer()
     await bot.send_message(callback_query.from_user.id,
-        "🧠 Центр психологічної допомоги ветеранам:
-"
-        "https://mva.gov.ua/pidtrimka-veteraniv-ta-chleniv-rodin
+        "🧠 Центр психологічної допомоги ветеранам:"
 
-"
+        "https://mva.gov.ua/pidtrimka-veteraniv-ta-chleniv-rodin"
+
+
         "📞 Гаряча лінія підтримки: 0 800 33 92 91"
     )
 
