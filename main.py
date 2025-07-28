@@ -38,7 +38,7 @@ deputies = {
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
-    await message.answer("Вітаю! Я бот для ветеранів Дніпропетровської області 💙💛
+    await message.answer("Вітаю! Я бот для ветеранів Дніпропетровської області 💙💛")
 Оберіть розділ:", reply_markup=main_menu)
 
 @dp.message_handler(lambda m: m.text == "💬 Моральна підтримка")
