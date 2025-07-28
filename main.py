@@ -79,13 +79,8 @@ async def financial_aid(callback_query: types.CallbackQuery):
 async def state_programs(callback_query: types.CallbackQuery):
     await callback_query.answer()
     await bot.send_message(callback_query.from_user.id,
-        "🏛 Державні програми:
-
-"
-        "🔹 Всі програми для ветеранів: https://mva.gov.ua/programi
-"
-        "🔹 Є-Ветеран: https://eveteran.gov.ua/"
-    )
+        f"🏛 Державні програми:\n🔹 Всі програми для ветеранів: https://mva.gov.ua/programi\n🔹 Є-Ветеран: https://eveteran.gov.ua/")
+ 
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
