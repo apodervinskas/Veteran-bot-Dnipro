@@ -116,11 +116,9 @@ async def handle_district(c: types.CallbackQuery):
 @dp.message_handler(lambda m: m.text == "🏛 Державні програми")
 async def gov(message: types.Message):
     await message.answer(
-        "🏛 Державні програми дивіться тут:
-"
-        "https://mva.gov.ua/dopomoha/derzhavni-programi",
-        parse_mode=types.ParseMode.MARKDOWN
-    )
+    "📋 Державні програми дивіться тут:\n\nhttps://mva.gov.ua/dopomoha/derzhavni-programi",
+    parse_mode=types.ParseMode.MARKDOWN
+)
 
 @dp.message_handler()
 async def unknown(message: types.Message):
