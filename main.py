@@ -58,11 +58,8 @@ async def legal_support(message: types.Message):
 
 @dp.message_handler(lambda m: m.text == "🦿 Реабілітація")
 async def rehabilitation(message: types.Message):
-    await message.answer("🦿 Реабілітація ветеранів:
+    await message.answer("⏱ Реабілітація ветеранів:\n\n👉 Протезування\n👉 Реабілітаційні центри\n👉 Програми підтримки")
 
-Протезування: https://www.veteranfund.mil.gov.ua/
-Реабілітаційні центри: https://www.mva.gov.ua/
-Програми: https://www.moz.gov.ua/")
 
 @dp.message_handler(lambda m: m.text == "📞 Контакти депутатів")
 async def contact_deputies(message: types.Message):
