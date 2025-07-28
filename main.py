@@ -71,7 +71,8 @@ async def send_contacts(callback_query: types.CallbackQuery):
     contacts = deputies[district]
     await bot.send_message(callback_query.from_user.id, f"Контакти депутатів у районі:\n{some_variable}")
 
-".join(contacts))
+await bot.send_message(callback_query.from_user.id, f"Контакти депутатів у районі:\n{'\n'.join(contacts)}")
+
 
 if __name__ == '__main__':
     from aiogram import executor
