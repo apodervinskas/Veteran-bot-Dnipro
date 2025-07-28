@@ -74,7 +74,8 @@ async def financial_aid(callback_query: types.CallbackQuery):
         "✅ Щорічна допомога ветеранам (від мерів та депутатів)"
         "🔗 Детальніше: https://mva.gov.ua/pidtrimka/finansova"
         f"📞 Контакти депутатів:
-" + "\n".join(contacts))
+" + "\n"
+.join(contacts))
 
 # Державні програми
 @dp.callback_query_handler(lambda c: c.data == "programs")
