@@ -38,29 +38,19 @@ async def moral_support(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(lambda c: c.data == "rehab")
 async def rehab(callback_query: types.CallbackQuery):
     await callback_query.answer()
-    await bot.send_message(callback_query.from_user.id,
-        "♿ Реабілітація:
-
-"
-        "🔹 Протезування: https://mva.gov.ua/reabilitaciya-ta-protezuvannya
-"
-        "🔹 Реабілітаційні центри: https://mva.gov.ua/dlya-veteraniv/reabilitaciyni-zakladi
-"
-        "🔹 Програми підтримки: https://mva.gov.ua/diyalnist/reabilitaciya"
-    )
-
+    await bot.send_message(callback_query.from_user.id,n/n"♿ Реабілітація:",n/n"🔹 Протезування: https://mva.gov.ua/reabilitaciya-ta-protezuvannya",n/n"🔹 Реабілітаційні центри: https://mva.gov.ua/dlya-veteraniv/reabilitaciyni-zakladi",n/n"🔹 Програми підтримки: https://mva.gov.ua/diyalnist/reabilitaciya")
+                           
 # Правова підтримка
 @dp.callback_query_handler(lambda c: c.data == "legal")
 async def legal_support(callback_query: types.CallbackQuery):
     await callback_query.answer()
     await bot.send_message(callback_query.from_user.id,
-        "⚖️ Правова підтримка:
+        "⚖️ Правова підтримка:"
 
-"
-        "1. Проходження МСЕК: https://mva.gov.ua/diyalnist/mediko-socialna-ekspertiza
-"
-        "2. Оформлення пенсії: https://mva.gov.ua/pitannya-pensijnogo-zabezpechennya
-"
+        "1. Проходження МСЕК: https://mva.gov.ua/diyalnist/mediko-socialna-ekspertiza"
+
+        "2. Оформлення пенсії: https://mva.gov.ua/pitannya-pensijnogo-zabezpechennya"
+
         "3. Статус інваліда війни: https://mva.gov.ua/dokumenty-ta-statusy"
     )
 
