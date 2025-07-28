@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: veteran-bot-dnipro
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        fromSecret: BOT_TOKEN
