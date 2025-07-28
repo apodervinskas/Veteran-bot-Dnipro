@@ -46,13 +46,14 @@ async def moral_support(message: types.Message):
    await message.answer("""Моральна підтримка:
 Оберіть з меню нижче.""", reply_markup=main_menu)
 
-        "• Центр психологічної допомоги ветеранів (Дніпро): +38 067 123 45 67"
-
+       await message.answer(
+    "📞 Центр психологічної допомоги ветеранів:\n"
+    "м. Дніпро: +38 067 123 45 67\n"
+    "м. Кривий Ріг: +38 099 222 33 44"
         "• Telegram‑чат з психологом: @dnipro_psy_support"
-
         "• [Графік груп підтримки](https://dnipro-veterans.org)",
-        parse_mode=types.ParseMode.MARKDOWN
-    )
+        parse_mode=types.ParseMode.MARKDOWN)
+
 
 @dp.message_handler(lambda m: m.text == "♿ Реабілітація")
 async def rehab(message: types.Message):
