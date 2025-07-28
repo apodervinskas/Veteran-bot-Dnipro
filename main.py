@@ -1,111 +1,113 @@
 import logging
 import os
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, Router, types
 from aiogram.enums import ParseMode
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram import F
-from aiogram.client.default import DefaultBotProperties
-from aiogram.filters import CommandStart
-from aiogram.types import Message, CallbackQuery
-from aiogram.utils.markdown import hbold
-
 from dotenv import load_dotenv
+
 load_dotenv()
 
 TOKEN = os.getenv("BOT_TOKEN") or "ВАШ_ТОКЕН_ТУТ"
 
+# Налаштування логування
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-dp = Dispatcher(storage=MemoryStorage())
+# Ініціалізація бота та диспетчера
+bot = Bot(token=TOKEN, parse_mode=ParseMode.HTML)
+storage = MemoryStorage()
+dp = Dispatcher(storage=storage)
+router = Router()
+dp.include_router(router)
 
-# Головне меню
-@dp.message_handler(commands=['start'])
-async def send_welcome(message: types.Message):
-    keyboard = InlineKeyboardMarkup(row_width=2)
-    keyboard.add(
-        InlineKeyboardButton("Моральна підтримка", callback_data="support"),
-        InlineKeyboardButton("Реабілітація", callback_data="rehab"),
-        InlineKeyboardButton("Правова підтримка", callback_data="legal"),
-        InlineKeyboardButton("Фінансова допомога", callback_data="financial"),
-        InlineKeyboardButton("Державні програми", callback_data="programs")
+
+# Стартове повідомлення
+@router.message(commands=['start'])
+async def cmd_start(message: types.Message):
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="📘 Довідкова інформація", callback_data="info")],
+        [InlineKeyboardButton(text="🦿 Реабілітація", callback_data="rehab")],
+        [InlineKeyboardButton(text="⚖️ Правова підтримка", callback_data="law")],
+        [InlineKeyboardButton(text="💰 Фінансова допомога", callback_data="finance")],
+        [InlineKeyboardButton(text="👥 Контакти депутатів", callback_data="contacts")],
+        [InlineKeyboardButton(text="🏛️ Державні програми", callback_data="programs")],
+    ])
+    await message.answer("👋 Вітаю! Оберіть розділ:", reply_markup=keyboard)
+
+
+# Довідкова інформація
+@router.callback_query(lambda c: c.data == "info")
+async def show_info(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "ℹ️ <b>Довідкова інформація</b>\n\n"
+        "📌 Телефон гарячої лінії Мінветеранів: 0-800-33-20-29\n"
+        "📌 Адреса: Київ, вул. Липська 5\n"
+        "📌 Сайт: https://mva.gov.ua"
     )
-    await message.answer("Вітаю! Оберіть розділ 👇", reply_markup=keyboard)
 
-# Моральна підтримка
-@dp.callback_query_handler(lambda c: c.data == "support")
-async def moral_support(callback_query: types.CallbackQuery):
-    await callback_query.answer()
-    await bot.send_message(callback_query.from_user.id,
-        "🧠 Центр психологічної допомоги ветеранам:"
-
-        "https://mva.gov.ua/pidtrimka-veteraniv-ta-chleniv-rodin"
-
-
-        "📞 Гаряча лінія підтримки: 0 800 33 92 91"
-    )
 
 # Реабілітація
-@dp.callback_query_handler(lambda c: c.data == "rehab")
-async def rehab(callback_query: types.CallbackQuery):
-    await callback_query.answer()
-    await bot.send_message(
-    callback_query.from_user.id,
-    "🧠 Реабілітація:\n"
-    "🔹 Протезування: https://mva.gov.ua/rehabilitaciya-ta-protezuvannya\n"
-    "🔹 Реабілітаційні центри: https://mva.gov.ua/dlya-veteraniv/rehabilitaciyni-zakladi\n"
-    "🔹 Програми підтримки: https://mva.gov.ua/diyalnist/rehabilitaciya"
-)
-
-    
-# Правова підтримка
-@dp.callback_query_handler(lambda c: c.data == "legal")
-async def legal_support(callback_query: types.CallbackQuery):
-    await callback_query.answer()
-    await bot.send_message(callback_query.from_user.id,
-        "⚖️ Правова підтримка:"
-
-        "1. Проходження МСЕК: https://mva.gov.ua/diyalnist/mediko-socialna-ekspertiza"
-
-        "2. Оформлення пенсії: https://mva.gov.ua/pitannya-pensijnogo-zabezpechennya"
-
-        "3. Статус інваліда війни: https://mva.gov.ua/dokumenty-ta-statusy"
+@router.callback_query(lambda c: c.data == "rehab")
+async def show_rehab(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "🦿 <b>Реабілітація</b>\n\n"
+        "🔹 Протезування: https://mva.gov.ua/pages/protezuvannya\n"
+        "🔹 Центри реабілітації: https://mva.gov.ua/pages/reabilitaciyni-zakladi\n"
+        "🔹 Програми: https://mva.gov.ua/pages/reabilitaciyni-programi"
     )
+
+
+# Правова підтримка
+@router.callback_query(lambda c: c.data == "law")
+async def show_law(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "⚖️ <b>Правова підтримка</b>\n\n"
+        "🔸 Проходження МСЕК: https://mva.gov.ua/pages/msek\n"
+        "🔸 Оформлення пенсії: https://mva.gov.ua/pages/pensii-veteranam\n"
+        "🔸 Статус інваліда війни: https://mva.gov.ua/pages/status-invalidnosti"
+    )
+
 
 # Фінансова допомога
-@dp.callback_query_handler(lambda c: c.data == "financial")
-async def financial_aid(callback_query: types.CallbackQuery):
-    await callback_query.answer()
-    contacts = [
-        "🏛 Дніпровський район: Іваненко О.О. – 099 123 45 67",
-        "🏛 Кам’янський район: Петренко І.І. – 098 765 43 21"
-    ]
-    await bot.send_message(callback_query.from_user.id,
-        "💸 Фінансова допомога від місцевої влади:"
-        "✅ Щорічна допомога ветеранам (від мерів та депутатів)"
+@router.callback_query(lambda c: c.data == "finance")
+async def show_finance(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "💰 <b>Фінансова допомога від місцевої влади:</b>\n"
+        "✅ Щорічна допомога ветеранам (від мерів та депутатів)\n"
         "🔗 Детальніше: https://mva.gov.ua/pidtrimka/finansova"
-   )     
-# Державні програми
-@dp.callback_query_handler(lambda c: c.data == "programs")
-async def state_programs(callback_query: types.CallbackQuery):
-    await callback_query.answer()
-    await bot.send_message(
-    callback_query.from_user.id,
-    (
-        "📜 Державні програми:\n"
-        "➤ Всі програми для ветеранів: https://mva.gov.ua/programi\n"
-        "➤ Є-Ветеран: https://eveteran.gov.ua/"
     )
-)
 
 
+# Контакти депутатів
+@router.callback_query(lambda c: c.data == "contacts")
+async def show_contacts(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "👥 <b>Контакти депутатів Дніпропетровської області:</b>\n"
+        "📍 Список депутатів: https://dniprorada.gov.ua/structure/deputies"
+    )
 
- 
-async def main():
-    await dp.start_polling(bot)
 
+# Державні програми
+@router.callback_query(lambda c: c.data == "programs")
+async def show_programs(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.answer(
+        "🏛️ <b>Державні програми:</b>\n"
+        "📎 Всі програми для ветеранів: https://mva.gov.ua/programi\n"
+        "📎 е-Ветеран: https://eveteran.gov.ua/"
+    )
+
+
+# Запуск бота
 if __name__ == "__main__":
     import asyncio
+
+    async def main():
+        await dp.start_polling(bot)
+
     asyncio.run(main())
