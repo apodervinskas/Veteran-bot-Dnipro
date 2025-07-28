@@ -6,11 +6,19 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram import F
+from aiogram.client.default import DefaultBotProperties
+from aiogram.filters import CommandStart
+from aiogram.types import Message, CallbackQuery
+from aiogram.utils.markdown import hbold
+
+from dotenv import load_dotenv
+load_dotenv()
 
 TOKEN = os.getenv("BOT_TOKEN") or "ВАШ_ТОКЕН_ТУТ"
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token=TOKEN, parse_mode=ParseMode.HTML)
+
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher(storage=MemoryStorage())
 
 # Головне меню
@@ -95,10 +103,9 @@ async def state_programs(callback_query: types.CallbackQuery):
 
 
  
-import asyncio
-
 async def main():
     await dp.start_polling(bot)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    import asyncio
     asyncio.run(main())
