@@ -52,9 +52,9 @@ async def moral_support(message: types.Message):
 async def legal_support(message: types.Message):
     await message.answer("⚖️ Напрями правової підтримки:")
 
-1. Проходження МСЕК
-2. Оформлення пенсії
-3. Статус інваліда війни")
+("1. Проходження МСЕК")
+("2. Оформлення пенсії")
+("3. Статус інваліда війни")
 
 @dp.message_handler(lambda m: m.text == "🦿 Реабілітація")
 async def rehabilitation(message: types.Message):
