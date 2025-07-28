@@ -69,9 +69,8 @@ async def contact_deputies(message: types.Message):
 async def send_contacts(callback_query: types.CallbackQuery):
     district = callback_query.data
     contacts = deputies[district]
-    await bot.send_message(callback_query.from_user.id, f"Контакти депутатів у районі:
+    await bot.send_message(callback_query.from_user.id, f"Контакти депутатів у районі:\n{some_variable}")
 
-" + "
 ".join(contacts))
 
 if __name__ == '__main__':
