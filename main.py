@@ -78,12 +78,13 @@ async def financial_aid(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(lambda c: c.data == "programs")
 async def state_programs(callback_query: types.CallbackQuery):
     await callback_query.answer()
-   await bot.send_message(
-    callback_query.from_user.id,
-    "📑 Державні програми:\n"
-    "🔹 Всі програми для ветеранів: https://mva.gov.ua/programi\n"
-    "🔹 Є-Ветеран: https://eveteran.gov.ua/"
-)
+    await bot.send_message(
+        callback_query.from_user.id,
+        "📑 Державні програми:\n"
+        "➤ Всі програми для ветеранів: https://mva.gov.ua/programi\n"
+        "➤ Є-Ветеран: https://eveteran.gov.ua/"
+    )
+
 
 
  
