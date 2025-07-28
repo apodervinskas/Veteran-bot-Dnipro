@@ -38,8 +38,15 @@ async def moral_support(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(lambda c: c.data == "rehab")
 async def rehab(callback_query: types.CallbackQuery):
     await callback_query.answer()
-    await bot.send_message(callback_query.from_user.id,n/n"♿ Реабілітація:",n/n"🔹 Протезування: https://mva.gov.ua/reabilitaciya-ta-protezuvannya",n/n"🔹 Реабілітаційні центри: https://mva.gov.ua/dlya-veteraniv/reabilitaciyni-zakladi",n/n"🔹 Програми підтримки: https://mva.gov.ua/diyalnist/reabilitaciya")
-                           
+await bot.send_message(
+    callback_query.from_user.id,
+    "🧠 Реабілітація:\n"
+    "🔹 Протезування: https://mva.gov.ua/rehabilitaciya-ta-protezuvannya\n"
+    "🔹 Реабілітаційні центри: https://mva.gov.ua/dlya-veteraniv/rehabilitaciyni-zakladi\n"
+    "🔹 Програми підтримки: https://mva.gov.ua/diyalnist/rehabilitaciya"
+)
+
+    
 # Правова підтримка
 @dp.callback_query_handler(lambda c: c.data == "legal")
 async def legal_support(callback_query: types.CallbackQuery):
