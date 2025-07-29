@@ -1,4 +1,10 @@
-.env
 __pycache__/
+.env
+.venv/
 *.pyc
-.env.*
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
