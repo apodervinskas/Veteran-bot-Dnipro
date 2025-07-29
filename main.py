@@ -111,3 +111,10 @@ if __name__ == "__main__":
         await dp.start_polling(bot)
 
     asyncio.run(main())
+
+
+if __name__ == "__main__":
+    if not TOKEN or TOKEN == "ВАШ_ТОКЕН_ТУТ":
+        raise ValueError("❌ BOT_TOKEN не встановлено у .env або Render Secret")
+    import asyncio
+    asyncio.run(dp.start_polling(bot))
